@@ -5,7 +5,7 @@
  * Return: pointer to EC_KEY structure or NULL
  * containing both the public and private keys, or NULL upon failure
  * Both the private and the public keys must be generated
- * You have to use the secp256k1 elliptic curve to create the new pair (See EC_CURVE macro)
+ * You have to use the secp256k1 elliptic curve to create the new pair
  */
 EC_KEY *ec_create(void)
 {
