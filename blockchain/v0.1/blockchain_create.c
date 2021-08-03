@@ -15,37 +15,37 @@
 */
 blockchain_t *blockchain_create(void)
 {
-    block_t *new_block = NULL;
-    blockchain_t *bchain = NULL;
-    llist_t *list = llist_create(MT_SUPPORT_TRUE);
-    int i = 0;
+	block_t *new_block = NULL;
+	blockchain_t *bchain = NULL;
+	llist_t *list = llist_create(MT_SUPPORT_TRUE);
+	int i = 0;
 
-    /*Allocate memory for create a block chain*/
-    bchain = calloc(1, sizeof(blockchain_t));
-    new_block = calloc(1, sizeof(block_t));
-    if (bchain == NULL || list == NULL || new_block == NULL)
-    {
-        free(bchain), free(new_block), llist_destroy(list, 1, NULL);
-        return (NULL);
-    }
-    /*Initialize the new block*/
-    (new_block->info).index = GENESIS_INDEX;
-    (new_block->info).difficulty = GENESIS_DIFFICULTY;
-    (new_block->info).timestamp = GENESIS_TIMESTAMP;
-    (new_block->info).nonce = GENESIS_NONCE;
+	/*Allocate memory for create a block chain*/
+	bchain = calloc(1, sizeof(blockchain_t));
+	new_block = calloc(1, sizeof(block_t));
+	if (bchain == NULL || list == NULL || new_block == NULL)
+	{
+		free(bchain), free(new_block), llist_destroy(list, 1, NULL);
+		return (NULL);
+	}
+	/*Initialize the new block*/
+	(new_block->info).index = GENESIS_INDEX;
+	(new_block->info).difficulty = GENESIS_DIFFICULTY;
+	(new_block->info).timestamp = GENESIS_TIMESTAMP;
+	(new_block->info).nonce = GENESIS_NONCE;
 
-    for (i = 0; i < 32; i++)
-        ((new_block->info).prev_hash)[i] = GENESIS_PREV_HASH;
+	for (i = 0; i < 32; i++)
+		((new_block->info).prev_hash)[i] = GENESIS_PREV_HASH;
 
-    new_block->data.len = GENESIS_LEN;
-    memcpy(new_block->data.buffer, GENESIS_BUFFER, GENESIS_LEN);
-    memcpy(new_block->hash, GENESIS_HASH, SHA256_DIGEST_LENGTH);
-    /*Add the new block into the chain of blocks*/
-    if (llist_add_node(list, new_block, ADD_NODE_FRONT) != 0)
-    {
-        free(bchain), free(new_block), llist_destroy(list, 1, NULL);
-        return (NULL);
-    }
-    bchain->chain = list;
-    return (bchain);
+	new_block->data.len = GENESIS_LEN;
+	memcpy(new_block->data.buffer, GENESIS_BUFFER, GENESIS_LEN);
+	memcpy(new_block->hash, GENESIS_HASH, SHA256_DIGEST_LENGTH);
+	/*Add the new block into the chain of blocks*/
+	if (llist_add_node(list, new_block, ADD_NODE_FRONT) != 0)
+	{
+		free(bchain), free(new_block), llist_destroy(list, 1, NULL);
+		return (NULL);
+	}
+	bchain->chain = list;
+	return (bchain);
 }
