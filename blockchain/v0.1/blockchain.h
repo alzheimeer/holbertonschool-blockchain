@@ -10,6 +10,8 @@
 #include <string.h>
 #include <time.h>
 
+#define SET_MAX_LEN(x, y) ((x > y) ? y : x)
+
 /**
  * struct block_info_s - Block info structure
  *
