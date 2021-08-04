@@ -2,14 +2,21 @@
 #define BLOCK_CHAIN_H
 
 #include "../../crypto/hblk_crypto.h"
-#include <llist.h>
+#include "provided/endianness.h"
 #include <stdint.h>
-#include <openssl/sha.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <llist.h>
 #include <time.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+#define HBLK_MAGIC "HBLK"
+#define HBLK_VERSION "0.1"
 #define SET_MAX_LEN(x, y) ((x > y) ? y : x)
 
 /**
@@ -126,6 +133,7 @@ uint8_t *block_hash(block_t const *block,
 					uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
 int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 blockchain_t *blockchain_deserialize(char const *path);
+llist_t *deserialize_blocks(int fd, uint32_t size, uint8_t endianness);
 int block_is_valid(block_t const *block, block_t const *prev_block);
 
 uint8_t _get_endianness(void);
