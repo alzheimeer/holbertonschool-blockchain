@@ -77,6 +77,26 @@ go through this step by step.
 	15. Update: Blockchain serialization & deserialization - Actualizar las funciones blockchain_serialize y blockchain_deserialize, para serializar la lista de transacciones de cada bloque.
 	16. Blockchain library - Escriba un makefile que compila todas las funciones anteriores y las archiva en una biblioteca estática para uso futuro.
 
+## 0x04. Blockchain - CLI
+	0. CLI - Create/Load Wallet -  Cargar wallet (EC key pair)
+	1. CLI - Save Wallet - Guardar wallet (EC key pair)
+	2. CLI - send - Enviar monedas 
+		- Crear una nueva transacción
+		- Verificar la validez de la transacción.
+		- Agregar transacción a una lista local (transaction pool)
+		- NO actualizar la lista de no gastar
+	3. CLI - mine - Mine un bloque
+		- Crea un nuevo bloque usando el Blockchain API
+		- Si las transacciones están disponibles en el grupo de transacciones locales, Incluir las transacciones 1 por 1 en el bloque.
+		- Establezca la dificultad del bloque utilizando el método de ajuste de dificultad.
+		- Inyectar una transacción de coinbase como la primera transacción en el bloque
+		- Mine el bloque (prueba de trabajo)
+		- Verificar la validez del bloque
+		- Añadir el bloque a la Blockchain
+	4. CLI - info - Mostrar información sobre el Blockchain
+	5. CLI - load - Implementar la carga de comandos
+	6. CLI - save - Guardar el local Blockchain en un archivo
+
 ## Author
 Edgar Quintero - <fogniebla@hotmail.com>  
 
